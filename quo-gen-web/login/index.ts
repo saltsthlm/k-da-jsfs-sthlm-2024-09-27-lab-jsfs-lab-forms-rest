@@ -15,14 +15,12 @@ const addListeners = () => {
     if (!isValidEmail(username)) {
       showErrorToast("Could not login. Username or password incorrect")
     }
-    // hint: user form elements to get the input value
     const password = "";
     login({
       username,
       password,
     })
       .then((res) => {
-        //console.log(res)
         if (res) {
           alert("Logged in successfully");
           window.location.replace("http://localhost:5173/")
