@@ -6,7 +6,7 @@ const addListeners = () => {
   const loginForm = document.querySelector("#loginForm");
   loginForm?.addEventListener("submit", (ev: Event) => {
     ev.preventDefault();
-    const username = "username";
+    const username = "";
     const password = "";
     // hint: user form elements to get the input value
     login({
