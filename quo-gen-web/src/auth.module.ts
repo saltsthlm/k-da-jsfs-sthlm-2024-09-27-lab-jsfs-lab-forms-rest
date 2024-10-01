@@ -6,14 +6,14 @@ export const logout = () => {
   // needs to be implemented
 };
 
-export const register = ({
+export const register = async ({
   username,
   password,
 }: {
   username: string;
   password: string;
 }) => {
-  return fetch('http://localhost:3000/api/v1/auth', {
+  const response = await fetch(`${authAPIBase}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -21,17 +21,15 @@ export const register = ({
     },
     credentials: 'include',
     body: JSON.stringify({ username, password }),
-  })
-  .then(response => {
-    if (!response.ok) {
-      return response.json().then(errorData => {
-        throw new Error(errorData.message || 'Registration failed');
-      });
-    }
-    return response.json(); 
   });
-};
 
+  if (!response.ok) {
+    const jsonResponse = await response.json();
+    throw new Error(jsonResponse.message || 'Registration failed');
+  }
+    
+  return await response.json(); 
+};
 
 export const login = async ({
   username,
@@ -41,16 +39,19 @@ export const login = async ({
   password: string;
 }) => {
   const response = await fetch(`${authAPIBase}/login`, {
-    method: "POST",
-    headers:{ 
-      "Content-Type": "application/json",
-      "Accept": "application/json",
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
-    credentials: "include",
-    body: JSON.stringify({username, password})
-  })
+    credentials: 'include',
+    body: JSON.stringify({ username, password }),
+  });
 
-  if (!response.ok) throw new Error("something went wrong")
-    return await response.json();
-
+  if (!response.ok) {
+    const jsonResponse = await response.json();
+    throw new Error(jsonResponse.message || 'Registration failed');
+  }
+    
+  return await response.json();
 };
