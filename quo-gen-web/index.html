@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote(s) of the day 💪</title>
+  </head>
+
+  <body>
+    <div
+      id="app"
+      class="flex flex-col gap-4 w-full items-center justify-center px-6 mx-auto max-w-lg"
+    >
+      <div class="fixed top-2 right-2" data-testid="fecthModeButtons">
+        <button class="fetch-mode-button" id="singleFetchMode">Single</button>
+        <button class="fetch-mode-button" id="multipleFetchMode">
+          Multiple
+        </button>
+        <button id="logoutButton" class="bg-white text-slate-900 ml-4">
+          Logout
+        </button>
+      </div>
+      <h1 class="text-center" data-testid="appHeading">Quote of the day 💪</h1>
+      <button id="refetchQuoteBtn">Refetch Quote(s)</button>
+      <div data-testid="loader" class="lds-facebook" id="loader" hidden>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div
+        class="text-center mt-4 flex flex-col gap-6"
+        id="quotesContainer"
+      ></div>
+    </div>
+    <template id="quote-template">
+      <article class="quote">
+        <h2 class="text-4xl quote-text"></h2>
+        <h3 class="text-2xl mt-4 quote-author"></h3>
+      </article>
+    </template>
+    <template id="toast-template">
+      <div class="toast">This is an error message!</div>
+    </template>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

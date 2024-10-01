@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+
+  <body>
+    <div
+      id="app"
+      class="flex flex-col gap-4 w-full items-center justify-center px-6 mx-auto max-w-lg"
+    >
+      <h1 class="text-2xl mb-4">Login</h1>
+      <form id="loginForm" class="flex flex-col gap-4 text-left">
+        <fieldset class="flex flex-col gap-4">
+          <label
+            for="username"
+            class="block text-xs font-medium text-gray-700 dark:text-gray-300"
+          >
+            Username
+          </label>
+
+          <input
+            type="email"
+            id="username"
+            placeholder="john@appliedtechnology.se"
+            class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+          />
+        </fieldset>
+        <fieldset class="flex flex-col gap-4">
+          <label
+            for="password"
+            class="block text-xs font-medium text-gray-700 dark:text-gray-300"
+          >
+            Password
+          </label>
+
+          <input
+            type="password"
+            id="password"
+            placeholder="*******"
+            class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+          />
+        </fieldset>
+        <section>
+          <h2 class="text-base">
+            Don't have an account yet? <a href="/register/">Register</a>
+          </h2>
+        </section>
+        <button type="submit">Submit</button>
+      </form>
+      <div data-testid="loader" class="lds-facebook" id="loader" hidden>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <template id="toast-template">
+      <div class="toast">This is an error message!</div>
+    </template>
+    <script type="module" src="/login/index.ts"></script>
+  </body>
+</html>
