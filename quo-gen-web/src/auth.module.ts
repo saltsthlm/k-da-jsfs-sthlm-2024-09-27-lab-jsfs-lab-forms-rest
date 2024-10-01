@@ -38,8 +38,6 @@ export const login = ({
     },
     credentials: "include"
   })
-   // if (!response.ok)return "Couldent fetch"
-    //const user = await response.json()
 
   return Promise.resolve(response);
 };
