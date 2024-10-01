@@ -13,31 +13,44 @@ export const register = ({
   username: string;
   password: string;
 }) => {
-  /**
-   * use fetch
-   * method is POST
-   * headers that should be set 'Content-Type' and 'Accept'
-   * set `credentials` to `include` otherwise cookies won't work
-   */
-  return Promise.resolve(null);
+  return fetch('http://localhost:3000/api/v1/auth', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({ username, password }),
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(errorData => {
+        throw new Error(errorData.message || 'Registration failed');
+      });
+    }
+    return response.json(); 
+  });
 };
 
-export const login = ({
+
+export const login = async ({
   username,
   password,
 }: {
   username: string;
   password: string;
 }) => {
-  const response =  fetch("http://localhost:3000/api/v1/auth/login", {
+  const response = await fetch(`${authAPIBase}/login`, {
     method: "POST",
-    body: JSON.stringify({username, password}),
     headers:{ 
       "Content-Type": "application/json",
       "Accept": "application/json",
     },
-    credentials: "include"
+    credentials: "include",
+    body: JSON.stringify({username, password})
   })
 
-  return Promise.resolve(response);
+  if (!response.ok) throw new Error("something went wrong")
+    return await response.json();
+
 };
