@@ -20,8 +20,9 @@ const addListeners = () => {
       username,
       password,
     })
-      .then((res) => {
+        .then((res) => {
         if (res.user) {
+          console.log(res.user)
           alert("Logged in successfully");
           window.location.replace("http://localhost:5173/")
         } else {
