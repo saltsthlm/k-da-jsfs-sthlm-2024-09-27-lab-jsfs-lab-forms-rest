@@ -29,7 +29,7 @@ export const login = ({
   username: string;
   password: string;
 }) => {
-  fetch("http://localhost:3000/api/v1/auth/login", {
+  const response =  fetch("http://localhost:3000/api/v1/auth/login", {
     method: "POST",
     body: JSON.stringify({username, password}),
     headers:{ 
@@ -38,6 +38,8 @@ export const login = ({
     },
     credentials: "include"
   })
+   // if (!response.ok)return "Couldent fetch"
+    //const user = await response.json()
 
-  return Promise.resolve(null);
+  return Promise.resolve(response);
 };
