@@ -21,7 +21,7 @@ const addListeners = () => {
       password,
     })
       .then((res) => {
-        if (res) {
+        if (res.user) {
           alert("Logged in successfully");
           window.location.replace("http://localhost:5173/")
         } else {
@@ -29,7 +29,7 @@ const addListeners = () => {
         }
       })
       .catch((err) => {
-        // use showErrorToast
+        showErrorToast("Could not login. Username or password incorrect")
       });
   });
 };
