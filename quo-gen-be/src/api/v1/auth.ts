@@ -4,6 +4,7 @@ import { sign } from "jsonwebtoken";
 import "../../types";
 import { ZodError, z } from "zod";
 import { SECRET_KEY } from "../../middlewares/auth.middleware";
+import { db } from "./users";
 
 export type User = {
   username: string;
@@ -15,7 +16,7 @@ const userSchema = z.object({
   password: z.string(),
 });
 
-const users: User[] = [];
+const users: User[] = db;
 
 const router = Router();
 
@@ -30,15 +31,25 @@ router.post("/login", async (req, res) => {
       message: "Username or password incorrect",
     });
   }
-  if (compareSync(password, user.password)) {
+
+  //if (compareSync(password, user.password)) {
+  if (password === user.password) {
     const token = sign({ username: user.username }, SECRET_KEY, {
       expiresIn: "1h",
     });
+
     // we need to use the token to set the cookies here
+
+    res.cookie('quotesAuthToken', token, {
+      httpOnly: true,
+      maxAge: 3000000,
+    });
+    
     res.status(200).json({
       user: {
         username: user.username,
       },
+      token
     });
   } else {
     return res.status(401).json({
