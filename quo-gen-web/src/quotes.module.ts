@@ -11,7 +11,14 @@ export const getRandomQuoteFromApi = async (
    * hint: if you get a 401 (access denied, it is because you're not sending the cookie to the server)
    * look at other APIs call on what you do to make it work for cookies
    */
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+    },
+    credentials: 'include'
+  });
+  
   const {
     quotes,
     quote,
